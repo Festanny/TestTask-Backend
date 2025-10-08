@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+django-filter = "*"
+django-debug-toolbar = "*"
+django-eav2 = "*"
+django-mptt = "*"
+psycopg2-binary = "*"
+pillow = "*"
+requests = "*"
+django-ckeditor = "*"
+django-rest-knox = "*"
+celery = {extras = ["redis"], version = "*"}
+django-environ = "*"
+gunicorn = "*"
+drf-yasg = "*"
+bs4 = "*"
+humanize = "*"
+django-admin-rangefilter = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
+python_full_version = "3.10.12"

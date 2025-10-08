@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {#    Выводим content, отключив экранирование#}
+    {#    Таким образом страницу можно целиком задать через админку #}
+    {% autoescape off %}{{ text_page_obj.content }}{% endautoescape %}
+{% endblock %}

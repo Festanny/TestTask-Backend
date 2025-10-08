@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Статичный вывод контактов</h1>
+    <ul>
+        <li>Телефон: {{ contact_phone.text }}</li>
+        <li>Адрес: {{ contact_adress.text }}</li>
+    </ul>
+
+
+    <h1>Динамический вывод контактов:</h1>
+    <ul>
+        {% for contact in contacts %}
+            <li>{{ contact.title }}: {{ contact.text }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

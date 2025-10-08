@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <title>
+        {% block title %}
+            {% if seo_object.seo_title %}
+                {{ seo_object.seo_title }}
+            {% elif object.seo_title %}
+                {{ object.seo_title }}
+            {% else %}
+                Base Django Project
+            {% endif %}
+        {% endblock %}
+    </title>
+
+    {% if site_settings.favicon %}
+        <link rel="icon" type="image/x-icon" href="{{ site_settings.favicon.url }}">
+    {% endif %}
+
+    {# Meta tags #}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+    {% block seo_header %}
+
+        {% if seo_object.seo_description %}
+            <meta name="description" content="{{ seo_object.seo_description }}"/>
+        {% elif object.seo_description %}
+            <meta name="description" content="{{ object.seo_description }}"/>
+        {% endif %}
+
+        {% if seo_object.seo_keywords %}
+            <meta name="keywords" content="{{ seo_object.seo_keywords }}"/>
+        {% elif object.keywords %}
+            <meta name="keywords" content="{{ object.seo_keywords }}"/>
+        {% endif %}
+
+        {% if seo_object.seo_title %}
+            <meta property="og:title" content="{{ seo_object.seo_title }}"/>
+        {% elif object.seo_title %}
+            <meta property="og:title" content="{{ object.seo_title }}"/>
+        {% endif %}
+
+        {% if seo_object.seo_description %}
+            <meta property="og:description" content="{{ seo_object.seo_description }}"/>
+        {% elif object.seo_description %}
+            <meta property="og:description" content="{{ object.seo_description }}"/>
+        {% endif %}
+
+        {% if is_canonical %}
+            <link rel="canonical" href="{{ canonical_url }}">
+        {% endif %}
+
+    {% endblock %}
+
+    {# Stylesheets #}
+    {# <link rel="stylesheet" href="css/master.css"> #}
+
+    {# Scripts #}
+    {# <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> #}
+
+    {#  Apply extra head html from site settings #}
+    {% autoescape off %}{{ site_settings.extra_head_html }}{% endautoescape %}
+    {# Extra head can be added in child html #}
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    {% block header %}{% endblock %}
+
+    {% block content %}
+
+        <h1>UTM playground</h1>
+        <p>Current user has these UTM's: </p>
+        <ul>
+        {% for uname, uval in request.session.utm.items %}
+            <li>{{ uname }}: {{ uval }}</li>
+        {% empty %}
+            <li>No UTM's</li>
+        {% endfor %}
+        </ul>
+    {% endblock %}
+
+    {% block footer %}{% endblock %}
+
+    {# Apply extra body html from site settings #}
+    {% autoescape off %}{{ site_settings.extra_body_html }}{% endautoescape %}
+</body>
+</html>
